@@ -123,7 +123,10 @@ const InventoryPage = () => {
                                                 <input 
                                                     type="number" 
                                                     value={counts[item.id]} 
-                                                    onChange={(e) => handleCountChange(item.id, parseInt(e.target.value) || 0)}
+                                                    onChange={(e) => handleCountChange(item.id, e.target.value)}
+                                                    onBlur={(e) => {
+                                                        if (e.target.value === "") handleCountChange(item.id, 0);
+                                                    }}
                                                     className="h-7 w-full text-center outline-none bg-transparent"
                                                 />
                                                 <div className={`h-3 w-full flex justify-center items-center border-t text-[10px]

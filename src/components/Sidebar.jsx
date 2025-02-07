@@ -6,6 +6,7 @@ import Orders from "../assets/icons/Orders.svg";
 import Integrations from "../assets/icons/Integrations.svg";
 import ProfileIcon from "../assets/icons/Profile.svg";
 import LogoutIcon from "../assets/icons/Logout.svg";
+import { useSidebar } from "../contexts/SidebarContext";
 
 const tabs = [
     { id: "materials", name: "Materials", icon: Materials },
@@ -16,7 +17,7 @@ const tabs = [
 
 const Sidebar = () => {
     const [isHovered, setIsHovered] = useState(false);
-    const [selectedTab, setSelectedTab] = useState("materials");
+    const { selectedTab, setSelectedTab } = useSidebar();
 
     return (
         <div
