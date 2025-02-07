@@ -29,7 +29,9 @@ const Sidebar = () => {
             {/* Top Section */}
             <div className="py-3 px-1 flex flex-col items-center gap-4 transition-all duration-300">
                 {/* Tally Icon (Header) */}
-                <div className="flex items-center py-2 w-full justify-center">
+                <div className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
+                    isHovered ? "px-3 justify-start" : "justify-center"
+                }`}>
                     <img src={Tally} alt="Tally"/>
                     {isHovered && (
                         <span className="ml-2 font-semibold text-indigo-800">Tally</span>
@@ -41,12 +43,12 @@ const Sidebar = () => {
                     <div
                         key={tab.id}
                         onClick={() => setSelectedTab(tab.id)}
-                        className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
+                        className={`flex items-center py-2 w-full text-sm rounded-lg cursor-pointer transition-all duration-200 ${
                             isHovered ? "px-3 justify-start" : "justify-center"
                         } ${
                             selectedTab === tab.id
-                                ? "bg-indigo-100 text-indigo-800 font-semibold border border-gray-300"
-                                : "hover:bg-gray-200 hover:text-black border-none"
+                                ? "bg-indigo-100 text-black outline outline-gray-300 shadow-sm"
+                                : "hover:bg-gray-200 outline-none shadow-none text-gray-600"
                         }`}
                     >
                         <img src={tab.icon} alt={tab.name} className="w-6 h-6 transition-all duration-300" />
@@ -58,7 +60,7 @@ const Sidebar = () => {
             </div>
 
             {/* Bottom Section */}
-            <div className="py-3 px-1 flex flex-col items-center transition-all duration-300">
+            <div className="py-3 px-1 flex flex-col items-center text-sm text-gray-600 transition-all duration-300">
                 {/* Logout Icon */}
                 <div
                     className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
