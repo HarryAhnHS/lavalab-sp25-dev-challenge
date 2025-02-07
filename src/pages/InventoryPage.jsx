@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { inventoryData } from "../models/mock.jsx";
+import { inventoryData } from "../models/mockInventory.jsx";
 
 import SearchIcon from "../assets/icons/Search.svg";
 import SortIcon from "../assets/icons/Sort.svg";
 import FilterIcon from "../assets/icons/Filter.svg";
+import MinusIcon from "../assets/icons/Minus.svg";
+import PlusIcon from "../assets/icons/Plus.svg";
 
 const InventoryPage = () => {
     const [search, setSearch] = useState("");
@@ -23,13 +25,13 @@ const InventoryPage = () => {
     }, [counts]);
 
     const handleSearch = (e) => {
-        const value = e.target.value.toLowerCase();
+        const value = e.target.value;
         setSearch(value);
         setFilteredData(
             inventoryData.filter((item) =>
-                item.name.toLowerCase().includes(value) ||
-                item.color.toLowerCase().includes(value) || 
-                item.size.toLowerCase().includes(value)
+                item.name.toLowerCase().includes(value.toLowerCase()) ||
+                item.color.toLowerCase().includes(value.toLowerCase()) || 
+                item.size.toLowerCase().includes(value.toLowerCase())
             )
         );
     };
@@ -91,7 +93,7 @@ const InventoryPage = () => {
                         </div>
 
                     </div>
-                    <button className="flex justify-center items-center bg-indigo-700 text-white text-sm px-4 rounded cursor-pointer">
+                    <button className="flex justify-center items-center bg-indigo-700 text-white text-xs px-4 rounded cursor-pointer">
                         <span className="mr-2">
                             +
                         </span>
@@ -120,11 +122,11 @@ const InventoryPage = () => {
                                     <td>
                                         <div className="h-10 flex items-center">
                                             <button 
-                                                onClick={() => handleCountChange(item.id, counts[item.id] - 1)}
-                                                className="h-full w-10 border-l border-y border-gray-300 rounded-l cursor-pointer"
+                                                onClick={() => handleCountChange(item.id, parseInt(counts[item.id]) - 1)}
+                                                className="h-full w-10 flex items-center justify-center border-l border-y border-gray-300 text-xl rounded-l cursor-pointer"
                                                 disabled={counts[item.id] === 0}
                                             >
-                                                -
+                                                <img src={MinusIcon} alt="Minus" className="w-4 h-4"></img> 
                                             </button>
                                             <div className={`h-full w-24 flex-1 flex flex-col items-center border 
                                                 ${isInvalid ? "border-gray-300 text-gray-700" : "border-yellow-600 bg-amber-100"}`}>
@@ -143,10 +145,10 @@ const InventoryPage = () => {
                                                 </div>
                                             </div>
                                             <button 
-                                                onClick={() => handleCountChange(item.id, counts[item.id] + 1)}
-                                                className="h-full w-10 border-r border-y border-gray-300 rounded-r cursor-pointer"
+                                                onClick={() => handleCountChange(item.id, parseInt(counts[item.id]) + 1)}
+                                                className="h-full w-10 flex items-center justify-center border-r border-y border-gray-300 text-xl rounded-r cursor-pointer"
                                             >
-                                                +
+                                                <img src={PlusIcon} alt="Plus" className="w-4 h-4"></img>   
                                             </button>
                                         </div>
                                     </td>
