@@ -4,14 +4,20 @@ import Materials from "../assets/icons/Materials.svg";
 import Products from "../assets/icons/Products.svg";
 import Orders from "../assets/icons/Orders.svg";
 import Integrations from "../assets/icons/Integrations.svg";
+import MaterialsDark from "../assets/icons/MaterialsDark.svg";
+import ProductsDark from "../assets/icons/ProductsDark.svg";
+import OrdersDark from "../assets/icons/OrdersDark.svg";
+import IntegrationsDark from "../assets/icons/IntegrationsDark.svg";
+
+
 import ProfileIcon from "../assets/icons/Profile.svg";
 import LogoutIcon from "../assets/icons/Logout.svg";
 import { useSidebar } from "../contexts/SidebarContext";
 
 const tabs = [
-    { id: "materials", name: "Materials", icon: Materials },
-    { id: "products", name: "Products", icon: Products },
-    { id: "orders", name: "Fulfillment", icon: Orders },
+    { id: "materials", name: "Materials", icon: Materials, darkIcon: MaterialsDark },
+    { id: "products", name: "Products", icon: Products, darkIcon: ProductsDark},
+    { id: "orders", name: "Fulfillment", icon: Orders, darkIcon: OrdersDark },
 ];
 
 const Sidebar = () => {
@@ -51,7 +57,7 @@ const Sidebar = () => {
                                 : "hover:bg-gray-200 outline-none shadow-none text-gray-600"
                         }`}
                     >
-                        <img src={tab.icon} alt={tab.name} className="w-6 h-6 transition-all duration-300" />
+                        <img src={selectedTab === tab.id ? tab.darkIcon : tab.icon } alt={tab.name} className="w-6 h-6 transition-all duration-300"/>
                         {isHovered && (
                             <span className="ml-2 transition-opacity duration-300">{tab.name}</span>
                         )}
@@ -69,7 +75,7 @@ const Sidebar = () => {
                             : "hover:bg-gray-200 outline-none shadow-none text-gray-600"
                     }`}
                 >
-                    <img src={Integrations} alt="integrations" className="w-6 h-6 transition-all duration-300" />
+                    <img src={selectedTab === "integrations" ? IntegrationsDark : Integrations} alt="integrations" className="w-6 h-6 transition-all duration-300" />
                     {isHovered && (
                         <span className="ml-2 transition-opacity duration-300">Integrations</span>
                     )}
