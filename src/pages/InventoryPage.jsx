@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { inventoryData } from "../models/mock.jsx";
 
 import SearchIcon from "../assets/icons/Search.svg";
@@ -8,11 +8,19 @@ import FilterIcon from "../assets/icons/Filter.svg";
 const InventoryPage = () => {
     const [search, setSearch] = useState("");
     const [filteredData, setFilteredData] = useState(inventoryData);
-    const [counts, setCounts] = useState(
-        inventoryData.reduce((acc, item) => ({ ...acc, [item.id]: 0 }), {})
-    );
+
+    // Load counts from localStorage or initialize with 0
+    const [counts, setCounts] = useState(() => {
+        const savedCounts = localStorage.getItem("inventoryCounts");
+        return savedCounts ? JSON.parse(savedCounts) : 
+            inventoryData.reduce((acc, item) => ({ ...acc, [item.id]: 0 }), {});
+    });
 
     const [activeTab, setActiveTab] = useState("inventory");
+
+    useEffect(() => {
+        localStorage.setItem("inventoryCounts", JSON.stringify(counts));
+    }, [counts]);
 
     const handleSearch = (e) => {
         const value = e.target.value.toLowerCase();
