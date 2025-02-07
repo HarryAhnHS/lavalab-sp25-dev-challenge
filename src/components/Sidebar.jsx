@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`h-screen px-2 flex flex-col justify-between z-10 border-r border-gray-300 shadow-sm bg-gray-100 text-black transition-all duration-300 ${
+            className={`h-screen px-2 flex flex-col justify-between z-10 border-r border-gray-300 shadow-sm bg-gray-100 truncate transition-all duration-300 ${
                 isHovered ? "w-48" : "w-14"
             }`}
             onMouseEnter={() => setIsHovered(true)}
@@ -29,7 +29,7 @@ const Sidebar = () => {
             {/* Top Section */}
             <div className="py-3 flex flex-col items-center gap-2 transition-all duration-300">
                 {/* Tally Icon (Header) */}
-                <div className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
+                <div className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-300 ${
                     isHovered ? "px-3 justify-start" : "justify-center"
                 }`}>
                     <img src={Tally} alt="Tally"/>
@@ -43,7 +43,7 @@ const Sidebar = () => {
                     <div
                         key={tab.id}
                         onClick={() => setSelectedTab(tab.id)}
-                        className={`flex items-center py-2 w-full text-sm rounded-lg cursor-pointer transition-all duration-200 ${
+                        className={`flex items-center py-2 w-full text-sm rounded-lg cursor-pointer transition-all duration-300 ${
                             isHovered ? "px-3 justify-start" : "justify-center"
                         } ${
                             selectedTab === tab.id
@@ -61,7 +61,7 @@ const Sidebar = () => {
                 <div className="border-t border-gray-300 w-full"></div>
                 <div
                     onClick={() => setSelectedTab("integrations")}
-                    className={`flex items-center py-2 w-full text-sm rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`flex items-center py-2 w-full text-sm rounded-lg cursor-pointer transition-all duration-300 ${
                         isHovered ? "px-3 justify-start" : "justify-center"
                     } ${
                         selectedTab === "integrations"
@@ -80,7 +80,7 @@ const Sidebar = () => {
             <div className="py-3 flex flex-col items-center text-sm text-gray-600 transition-all duration-300">
                 {/* Logout Icon */}
                 <div
-                    className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-300 ${
                         isHovered ? "px-3 justify-start" : "justify-center"
                     } hover:bg-gray-200 hover:text-black`}
                 >
@@ -90,12 +90,17 @@ const Sidebar = () => {
 
                 {/* Profile Icon */}
                 <div
-                    className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-200 ${
+                    className={`flex items-center py-2 w-full rounded-lg cursor-pointer transition-all duration-300 ${
                         isHovered ? "px-3 justify-start" : "justify-center"
                     } hover:bg-gray-200 hover:text-black`}
                 >
                     <img src={ProfileIcon} alt="Profile" className="w-8 h-8 transition-all duration-300" />
-                    {isHovered && <span className="ml-2">Profile</span>}
+                    {isHovered && 
+                        <div className="ml-2 flex flex-col justify-center text-[8px] whitespace-nowrap">
+                            <div className="text-sm font-bold">Don&lsquo;t Ruin It!</div>
+                            <div className="font-light">Harry Ahn</div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
