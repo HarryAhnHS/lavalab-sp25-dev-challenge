@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { inventoryData } from "../models/mock.jsx";
 
+import SearchIcon from "../assets/icons/Search.svg";
+import SortIcon from "../assets/icons/Sort.svg";
+import FilterIcon from "../assets/icons/Filter.svg";
+
 const InventoryPage = () => {
     const [search, setSearch] = useState("");
     const [filteredData, setFilteredData] = useState(inventoryData);
@@ -15,7 +19,9 @@ const InventoryPage = () => {
         setSearch(value);
         setFilteredData(
             inventoryData.filter((item) =>
-                item.name.toLowerCase().includes(value)
+                item.name.toLowerCase().includes(value) ||
+                item.color.toLowerCase().includes(value) || 
+                item.size.toLowerCase().includes(value)
             )
         );
     };
@@ -30,8 +36,8 @@ const InventoryPage = () => {
         <div className="flex-1 h-screen bg-gray-50 text-black py-8 px-24">
             <div className="flex justify-between items-center mb-4">
                 {/* Page Title */}
-                <h1 className="text-xl font-bold">
-                    Materials <span className="text-gray-400">/ Blanks</span>
+                <h1 className="text-xl font-semibold">
+                    Materials <span className="font-light text-gray-400">/ Blanks</span>
                 </h1>
 
                 {/* Toggle Button */}
@@ -56,14 +62,26 @@ const InventoryPage = () => {
             </div>
             <div className="bg-white rounded-lg border border-gray-100 shadow-sm p-4">
                 <div className="flex justify-between mb-4 text-xs">
-                    <div className="w-[30%]">
+                    <div className="relative w-[35%] flex">
+                        <div>
+                            <img src={SearchIcon} alt="search" className="absolute top-2 left-2 w-4 h-4"></img>
+                        </div>
                         <input
                             type="text"
-                            placeholder="Search inventory..."
+                            placeholder="Search Materials"
                             value={search}
                             onChange={handleSearch}
-                            className="w-full p-2 pl-10 border border-gray-300 rounded-sm focus:outline-none"
+                            className="w-full p-2 pl-8 border border-gray-300 rounded-sm focus:outline-none"
                         />
+                        <div className="ml-3 flex items-center gap-1">
+                            <div className="cursor-pointer">
+                                <img src={FilterIcon} alt="search" className="w-6 h-6"></img>
+                            </div>
+                            <div className="cursor-pointer">
+                                <img src={SortIcon} alt="search" className="w-6 h-6"></img>
+                            </div>
+                        </div>
+
                     </div>
                     <button className="flex justify-center items-center bg-indigo-700 text-white text-sm px-4 rounded cursor-pointer">
                         <span className="mr-2">
@@ -81,7 +99,7 @@ const InventoryPage = () => {
                             return (
                                 <tr key={item.id} className="flex items-center justify-between h-10 my-4 text-sm">
                                     <td className="flex items-center text-gray-700">
-                                        <div className={`h-10 w-10 mr-4 border border-gray-300 rounded 
+                                        <div className={`h-10 w-10 mr-4 border border-gray-300 rounded p-1
                                             ${item.color === "White" ? "bg-gray-800" : "bg-gray-50"}`}>
                                             <img src={item.image} alt={item.name} className="w-full h-full" />
                                         </div>
